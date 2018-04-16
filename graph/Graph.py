@@ -1,5 +1,5 @@
-import Edge
-import Vertex
+from Edge import Edge
+from Vertex import Vertex
 
 class Graph:
     """Simple Graph Library"""
@@ -8,7 +8,13 @@ class Graph:
         self.vertices = list()
 
     def add_edge(self, edge):
+        if not isinstance(edge, Edge):
+            raise ValueError("edge must be of type Edge")
         self.edges.append(edge)
+
+    def add_vertex(self, vertex):
+        if not isinstance(vertex, Vertex):
+            raise ValueError('vertex must be of type Vertex')
 
     def remove_edge(self, edge):
         try:
