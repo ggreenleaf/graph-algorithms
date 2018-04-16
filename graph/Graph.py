@@ -1,41 +1,64 @@
 from Edge import Edge
 from Vertex import Vertex
 
+
 class Graph:
     """Simple Graph Library"""
     def __init__(self):
-        self.edges = list()
-        self.vertices = list()
+        self.edges = {}
+        self.vertices = {}
 
-    def add_edge(self, edge):
-        if not isinstance(edge, Edge):
-            raise ValueError("edge must be of type Edge")
-        self.edges.append(edge)
+    def _add_edge(self, edge):
+        self.edges[edge.name] = edge
+    
+    def _remove_edge(self, edge):
+        self.edges.pop(edge.name)
 
-        v1 = edge.to_vertex
-        v2 = edge.from_vertex
-        self.add_vertex(v1)
-        self.add_vertex(v2)
+    def _add_vertex(self, vertex):
+        self.vertices[vertex.name] = vertex
 
-    def add_vertex(self, vertex):
-        if not isinstance(vertex, Vertex):
-            raise ValueError('vertex must be of type Vertex')
-            
-        if vertex not in self.vertices:
-            self.vertices.append(vertex)
+    def _remove_vertex(self, vertex):
+        self.vertices.pop(vertex.name)
 
-    def remove_edge(self, edge):
+    def get_vertex(self, name):
+        if not self.has_vertex(name):
+            raise ValueError('Vertex does not exist in graph')
+        return self.vertices[name]
+
+    def get_edge(self, name):
+        edge = self.get_edge(name)
+        if edge is None:
+            return
+        return edge
+
+    def has_vertex(self, name):
+        return name in self.vertices.keys()
+
+    def create_new_edge(self, name, from_v, to_v):
+        if not isinstance(from_v, Vertex) or not isinstance(to_v, Vertex):
+            raise ValueError('')
+
+    def remove_vertex(self, name):
+        vertex = self.get_vertex(name)
+        if (vertex is None):
+            return
+        try: 
+            self._remove_vertex(vertex)
+        except KeyError: 
+            #silently fail and continue
+            #just dont remove from the graph for now
+            return
+
+    def remove_edge(self, name):
+        edge = self.get_edge(name)
+        if (edge is None):
+            return
+
         try:
-            self.edges.remove(edge)
-        except ValueError:
-            pass
-            #do nothing for now we just can't remove it from the graph
-
-    def remove_vertex(self, vertex):
-        self.vertices.remove(vertex)
-        #find all edges that have that vertex and remove those as well
-        for edge in self.edges: 
-                if vertex == edge.from_vertex or vertex == edge.to_vertex:
-                    self.edges.remove(edge)
+            self._remove_edge(edge)
+        except KeyError:
+            #silently fail and continue
+            #just dont remove from the graph for now
+            return
     
     
