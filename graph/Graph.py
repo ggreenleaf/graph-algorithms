@@ -20,10 +20,9 @@ class Graph:
     def add_vertex(self, vertex):
         if not isinstance(vertex, Vertex):
             raise ValueError('vertex must be of type Vertex')
-        if vertex in self.vertices:
-            raise ValueError("Vertex already exists in graph")
-        
-        self.vertices.append(vertex)
+            
+        if vertex not in self.vertices:
+            self.vertices.append(vertex)
 
     def remove_edge(self, edge):
         try:
