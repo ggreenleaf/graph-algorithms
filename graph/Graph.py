@@ -12,9 +12,18 @@ class Graph:
             raise ValueError("edge must be of type Edge")
         self.edges.append(edge)
 
+        v1 = edge.to_vertex
+        v2 = edge.from_vertex
+        self.add_vertex(v1)
+        self.add_vertex(v2)
+
     def add_vertex(self, vertex):
         if not isinstance(vertex, Vertex):
             raise ValueError('vertex must be of type Vertex')
+        if vertex in self.vertices:
+            raise ValueError("Vertex already exists in graph")
+        
+        self.vertices.append(vertex)
 
     def remove_edge(self, edge):
         try:
