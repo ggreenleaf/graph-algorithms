@@ -1,10 +1,10 @@
-import Vertex
+from Vertex import Vertex
 from uuid import uuid1
 
 class Edge:
     """A simple Edge library"""
     def __init__(self, weight, from_vertex, to_vertex):
-        if (isinstance(from_vertex, Vertex) or isinstance(to_vertex, Vertex)):
+        if (not isinstance(from_vertex, Vertex) or not isinstance(to_vertex, Vertex)):
             raise TypeError('from or to vertex must be of Vertex Type')
         self.weight = weight
         self.from_vertex = from_vertex
