@@ -1,4 +1,4 @@
-from Vertex import Vertex
+from .Vertex import Vertex
 from uuid import uuid1
 
 class Edge:

@@ -1,6 +1,5 @@
-from Edge import Edge
-from Vertex import Vertex
-
+from .Edge import Edge
+from .Vertex import Vertex
 
 class Graph:
     """Simple Graph Library"""
@@ -19,12 +18,6 @@ class Graph:
 
     def _remove_vertex(self, vertex):
         self.vertices.pop(vertex.name)
-
-    # def _add_edge(self, weight, from_v, to_v):
-    #     print(from_v, to_v)
-    #     edge = Edge(weight, from_v, to_v)
-    #     self.edges
-    
 
     def add_vertex(self, name):
         if self.has_vertex(name):
